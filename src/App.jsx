@@ -6,6 +6,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { requestImagesByQuery } from "./services/images-api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
   const [images, setImages] = useState(null);
@@ -14,6 +15,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [secondPage, setSecondPage] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const onSearch = (searchTerm) => {
     setQuery(searchTerm);
@@ -24,6 +26,17 @@ function App() {
   const onAddPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
+
+  const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+
 
   useEffect(() => {
     if (query.length === 0) return;
@@ -58,9 +71,10 @@ function App() {
       <SearchBar onSearch={onSearch} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
-      <ImageGallery images={images} />
+      <ImageGallery images={images} openModal={openModal}/>
 
       {secondPage && <LoadMoreBtn onAddPage={onAddPage} />}
+      <ImageModal selectedImage={selectedImage} closeModal={closeModal}/>
     </div>
   );
 }

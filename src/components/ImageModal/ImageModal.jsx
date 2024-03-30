@@ -1,52 +1,49 @@
-import React from "react";
-import ReactModal from "react-modal";
+import Modal from 'react-modal';
 
 
-    ReactModal.setAppElement('#main');
+const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      padding: '0',
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "white", 
+      border: "none", 
+      margin: '30px',
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)", 
+    },
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.8)" 
+    }
+  };
 
-class ImageModal extends React.Component {
-  constructor () {
-    super();
-    this.state = {
-      showModal: false
-    };
-    
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
-  
-  handleOpenModal () {
-    this.setState({ showModal: true });
-  }
-  
-  handleCloseModal () {
-    this.setState({ showModal: false });
-  }
-  
-  render () {
-    return (
-      <div>
-        <button onClick={this.handleOpenModal}>Trigger Modal</button>
-        <ReactModal 
-           isOpen={this.state.showModal}
-           contentLabel="onRequestClose Example"
-           onRequestClose={this.handleCloseModal}
-        >
-          <p>Modal text!</p>
-          <button onClick={this.handleCloseModal}>Close Modal</button>
-        </ReactModal>
-      </div>
-    );
-  }
-}
 
-const props = {};
+const ImageModal = ({ selectedImage, closeModal }) => {
+    const handleModalClick = (event) => {
+        if (event.target === event.currentTarget) {
+          closeModal();
+        }
+      };
+      
 
-ReactDOM.render(<ExampleApp {...props} />, document.getElementById('main'))
 
   return (
-    <img src={regularImage} alt="" />
+    <Modal
+      isOpen={!!selectedImage}
+      onRequestClose={closeModal}
+      onClick={handleModalClick}
+      style={customStyles}
+    >
+      <div>
+        <img src={selectedImage} alt="Selected" />
+      </div>
+    </Modal>
   )
 }
 
 export default ImageModal
+
+
