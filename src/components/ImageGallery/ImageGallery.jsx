@@ -10,6 +10,7 @@ const ImageGallery = ({images}) => {
           return (
             <li key={image.urls.small}>
               <ImageCard image={image}/>
+              
             </li>
           );
         })}
