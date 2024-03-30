@@ -1,3 +1,5 @@
+import css from "./ImageCard.module.css"
+
 const ImageCard = ({ image, openModal }) => {
 
   const handleClick = () => {
@@ -6,8 +8,8 @@ const ImageCard = ({ image, openModal }) => {
 
 
   return (
-    <div onClick={handleClick}>
-      <img src={image.urls.small} />
+    <div onClick={handleClick} className={css.listThumb}>
+      <img src={image.urls.small} className={css.listImg}/>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.loadBtn {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    margin: 0 auto;
+    display: block;
+  }
+  .loadBtn:hover,
+  .loadBtn:focus {
+    background-color: #0a69ce;
+  }
+  

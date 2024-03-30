@@ -1,4 +1,5 @@
 import toast, { Toaster } from "react-hot-toast";
+import css from './SearchBar.module.css'
 const notify = () =>
   toast.error("Notification: Please Enter Text for Image Search");
 
@@ -16,8 +17,8 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
+    <header className={css.header}>
+      <form onSubmit={handleSubmit} className={css.headerForm}>
         <input
           type="text"
           name="searchImage"
