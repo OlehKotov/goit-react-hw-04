@@ -8,7 +8,7 @@ const SearchBar = ({ onSearch }) => {
     evt.preventDefault();
     const form = evt.target;
     const searchTerm = form.elements.searchImage.value;
-    if (form.elements.searchImage.value.trim() === "") {
+    if (searchTerm.trim() === "") {
       notify();
       return;
     }

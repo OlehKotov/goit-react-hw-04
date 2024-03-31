@@ -39,10 +39,10 @@ function App() {
 
 
   useEffect(() => {
-    if (query.length === 0) return;
-
+    if (query !== query) return;
     async function fetchImagesByQuery() {
       try {
+        setSecondPage(false);
         setLoading(true);
         const data = await requestImagesByQuery(query, page);
         setImages((prevImages) => {
@@ -51,9 +51,7 @@ function App() {
           }
           return [...prevImages, ...data];
         });
-        if (page === 1) {
-          setSecondPage(true);
-        }
+        
         setSecondPage(true);
       } catch (error) {
         setError(true);
@@ -69,10 +67,10 @@ function App() {
   return (
     <div>
       <SearchBar onSearch={onSearch} />
-      {loading && <Loader />}
+      
       {error && <ErrorMessage />}
       <ImageGallery images={images} openModal={openModal}/>
-
+      {loading && <Loader />}
       {secondPage && <LoadMoreBtn onAddPage={onAddPage} />}
       <ImageModal selectedImage={selectedImage} closeModal={closeModal}/>
     </div>
