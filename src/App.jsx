@@ -20,6 +20,7 @@ function App() {
   const onSearch = (searchTerm) => {
     setQuery(searchTerm);
     setPage(1);
+    setImages([]); 
     setSecondPage(false);
   };
 
@@ -39,19 +40,13 @@ function App() {
 
 
   useEffect(() => {
-    if (query !== query) return;
+    if (!query) return;
     async function fetchImagesByQuery() {
       try {
         setSecondPage(false);
         setLoading(true);
         const data = await requestImagesByQuery(query, page);
-        setImages((prevImages) => {
-          if (!Array.isArray(prevImages)) {
-            return data;
-          }
-          return [...prevImages, ...data];
-        });
-        
+        setImages((prevImages) => [...prevImages, ...data]);
         setSecondPage(true);
       } catch (error) {
         setError(true);
