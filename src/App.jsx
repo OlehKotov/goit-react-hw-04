@@ -9,19 +9,17 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
-  const [images, setImages] = useState(null);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
-  const [secondPage, setSecondPage] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const onSearch = (searchTerm) => {
     setQuery(searchTerm);
     setPage(1);
     setImages([]); 
-    setSecondPage(false);
   };
 
   const onAddPage = () => {
@@ -43,11 +41,9 @@ function App() {
     if (!query) return;
     async function fetchImagesByQuery() {
       try {
-        setSecondPage(false);
         setLoading(true);
         const data = await requestImagesByQuery(query, page);
         setImages((prevImages) => [...prevImages, ...data]);
-        setSecondPage(true);
       } catch (error) {
         setError(true);
       } finally {
@@ -66,7 +62,7 @@ function App() {
       {error && <ErrorMessage />}
       <ImageGallery images={images} openModal={openModal}/>
       {loading && <Loader />}
-      {secondPage && <LoadMoreBtn onAddPage={onAddPage} />}
+      {images.length > 0 && <LoadMoreBtn onAddPage={onAddPage} />}
       <ImageModal selectedImage={selectedImage} closeModal={closeModal}/>
     </div>
   );

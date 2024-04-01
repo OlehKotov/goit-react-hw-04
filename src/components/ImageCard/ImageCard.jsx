@@ -8,8 +8,8 @@ const ImageCard = ({ image, openModal }) => {
 
 
   return (
-    <div onClick={handleClick} className={css.listThumb}>
-      <img src={image.urls.small} className={css.listImg}/>
+    <div className={css.listThumb}>
+      <img onClick={handleClick} src={image.urls.small} className={css.listImg}/>
     </div>
   );
 };
